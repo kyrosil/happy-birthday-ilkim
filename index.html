@@ -29,6 +29,7 @@
       background: radial-gradient(circle, rgba(255, 107, 107, 0.2) 10%, rgba(138, 43, 226, 0.3) 30%, transparent 70%);
       animation: nebulaGlow 8s infinite ease-in-out;
       opacity: 0.6;
+      z-index: -2;
     }
     @keyframes nebulaGlow {
       0% { transform: scale(1); opacity: 0.6; }
@@ -39,18 +40,16 @@
       font-size: 3.5rem;
       font-weight: 700;
       text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ff88;
-      position: absolute;
-      top: 5%;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-bottom: 20px;
+      position: relative;
+      margin: 20px 0;
+      z-index: 1;
     }
     .letter {
       opacity: 0;
       animation: fadeInLetter 0.5s forwards;
       color: #ff00ff;
       text-shadow: 0 0 10px #ff00ff;
+      display: inline-block;
     }
     @keyframes fadeInLetter {
       0% { opacity: 0; transform: translateY(-20px); }
@@ -60,6 +59,7 @@
       font-size: 2.5rem;
       text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff;
       margin: 10px 0;
+      z-index: 1;
     }
     p#message {
       font-size: 1.2rem;
@@ -68,6 +68,7 @@
       margin: 10px 0;
       text-shadow: 0 0 10px #fff;
       animation: slideUp 2s ease-in-out;
+      z-index: 1;
     }
     button {
       padding: 12px 25px;
@@ -81,6 +82,7 @@
       transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
       box-shadow: 0 0 20px #ff00ff;
       margin: 5px;
+      z-index: 1;
     }
     button:hover {
       transform: scale(1.1);
@@ -98,6 +100,7 @@
       width: 200px;
       height: 150px;
       margin: 20px 0;
+      z-index: 1;
     }
     #cake {
       width: 200px;
@@ -164,6 +167,8 @@
       text-align: center;
       box-shadow: 0 0 30px #ff00ff;
       max-width: 90%;
+      position: relative;
+      z-index: 101;
     }
     #wish-content h2 {
       font-size: 1.5rem;
@@ -178,6 +183,7 @@
       border-radius: 5px;
       font-size: 1rem;
       font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
     }
     #wish-stars {
       position: absolute;
@@ -186,6 +192,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      z-index: 102;
     }
     .star {
       position: absolute;
@@ -209,9 +216,10 @@
       font-size: 0.8rem;
       color: #fff;
       text-shadow: 0 0 5px #ff00ff;
+      z-index: 1;
     }
     @media (max-width: 600px) {
-      #name-animation { font-size: 2rem; top: 3%; }
+      #name-animation { font-size: 2rem; margin: 10px 0; }
       h1 { font-size: 1.8rem; }
       p#message { font-size: 1rem; }
       button { font-size: 0.9rem; padding: 8px 15px; }
@@ -225,7 +233,7 @@
       #footer { font-size: 0.7rem; }
     }
     @media (max-width: 400px) {
-      #name-animation { font-size: 1.8rem; top: 2%; }
+      #name-animation { font-size: 1.8rem; margin: 5px 0; }
       h1 { font-size: 1.5rem; }
       p#message { font-size: 0.9rem; }
       button { font-size: 0.8rem; padding: 6px 12px; }
@@ -245,24 +253,24 @@
     <div class="candle" id="candle2"></div>
     <div class="candle" id="candle3"></div>
   </div>
-  <button onclick="blowCandles()">Mumları Üfle! 🕯️</button>
-  <button onclick="showSurprise()">Evrenin En Büyük Sürprizini Keşfet! 🌌</button>
-  <button onclick="document.querySelector('audio').play()" style="background: #ffd700;">Müziği Çal 🎶</button>
+  <button id="blow-candles-btn">Mumları Üfle! 🕯️</button>
+  <button id="surprise-btn">Evrenin En Büyük Sürprizini Keşfet! 🌌</button>
+  <button id="play-music-btn" style="background: #ffd700;">Müziği Çal 🎶</button>
   <canvas id="confetti"></canvas>
 
   <div id="wish-modal">
     <div id="wish-content">
       <h2>İlkim, Şimdi Dileğini Tut! 🌠</h2>
       <input type="text" id="wish-input" placeholder="Dileğini yaz...">
-      <button onclick="makeWish()">Dileğini Tut!</button>
+      <button id="make-wish-btn">Dileğini Tut!</button>
       <div id="wish-stars"></div>
     </div>
   </div>
 
   <div id="footer">Kyros tarafından sevgiyle hazırlandı ❤️</div>
 
-  <audio autoplay loop>
-    <source src="https://github.com/kyrosil/happy-birthday-ilkim/blob/main/İyi ki doğdun İLKİM - İsme Özel Doğum Günü Şarkısı.mp3?raw=true" type="audio/mp3">
+  <audio id="birthday-audio">
+    <source src="https://github.com/kyrosil/happy-birthday-ilkim/raw/main/İyi%20ki%20doğdun%20İLKİM%20-%20İsme%20Özel%20Doğum%20Günü%20Şarkısı.mp3" type="audio/mp3">
   </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -289,8 +297,10 @@
         scalar: 1
       });
     }
-    setInterval(launchConfetti, 3000);
+    // İlk yüklemede bir kez konfeti
     launchConfetti();
+    // 5 saniyede bir konfeti (performans için aralığı artırdım)
+    setInterval(launchConfetti, 5000);
 
     // Rastgele sürpriz mesajlar
     const messages = [
@@ -301,15 +311,10 @@
       "İlkim, bu yıl senin için destansı bir macera başlasın! En havalı yıldız sensin! 😎"
     ];
     function showSurprise() {
-      console.log("showSurprise fonksiyonu çağrıldı!");
       const messageElement = document.getElementById('message');
-      if (messageElement) {
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        messageElement.innerText = randomMessage;
-        launchConfetti();
-      } else {
-        console.error("message elementi bulunamadı!");
-      }
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      messageElement.innerText = randomMessage;
+      launchConfetti();
     }
 
     // Mumları üfleme
@@ -321,6 +326,7 @@
         });
         document.getElementById('wish-modal').style.display = 'flex';
         candlesBlown = true;
+        launchConfetti();
       }
     }
 
@@ -339,10 +345,36 @@
         setTimeout(() => {
           document.getElementById('wish-modal').style.display = 'none';
           document.getElementById('wish-input').value = '';
+          starsContainer.innerHTML = ''; // Yıldızları temizle
           launchConfetti();
         }, 2000);
+      } else {
+        alert('Lütfen bir dilek yaz! 🌠');
       }
     }
+
+    // Müzik kontrolü
+    const audio = document.getElementById('birthday-audio');
+    let isPlaying = false;
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        document.getElementById('play-music-btn').innerText = 'Müziği Çal 🎶';
+      } else {
+        audio.play().catch(error => {
+          console.error('Müzik oynatma hatası:', error);
+          alert('Müzik oynatılamadı. Lütfen dosya yolunu kontrol edin veya tarayıcı izinlerini gözden geçirin.');
+        });
+        document.getElementById('play-music-btn').innerText = 'Müziği Durdur ⏸️';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Buton olay dinleyicileri
+    document.getElementById('blow-candles-btn').addEventListener('click', blowCandles);
+    document.getElementById('surprise-btn').addEventListener('click', showSurprise);
+    document.getElementById('play-music-btn').addEventListener('click', toggleMusic);
+    document.getElementById('make-wish-btn').addEventListener('click', makeWish);
   </script>
 </body>
 </html>
