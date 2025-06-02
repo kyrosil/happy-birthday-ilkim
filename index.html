@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlkim'in Galaktik Doğum Günü Partisi 🌟</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e1e2f, #3b1e5a);
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Yıldız parıltı efekti için arka plan */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: twinkle 5s infinite;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+    h1 {
+      font-size: 4rem;
+      text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff;
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-bottom: 20px;
+    }
+    p#message {
+      font-size: 1.5rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 20px;
+      text-shadow: 0 0 10px #fff;
+      animation: slideUp 2s ease-in-out;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(45deg, #ff00ff, #00ff88);
+      border: none;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 20px #ff00ff;
+      animation: pulse 1.5s infinite;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #00ff88;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    a-scene {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      height: 200px;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff; }
+      100% { text-shadow: 0 0 30px #fff, 0 0 60px #00ff88; }
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 20px #ff00ff; }
+      50% { box-shadow: 0 0 40px #00ff88; }
+      100% { box-shadow: 0 0 20px #ff00ff; }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      p#message { font-size: 1.2rem; }
+      button { font-size: 1rem; padding: 10px 20px; }
+      a-scene { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <a-scene embedded>
+    <a-text value="İLKİM" color="#ff00ff" position="0 1 -5" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-text>
+    <a-sphere position="-1.5 0.5 -4" radius="0.3" color="#ffd700" animation="property: position; to: -1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
+    <a-sphere position="1.5 0.5 -4" radius="0.3" color="#00ff88" animation="property: position; to: 1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
+    <a-box position="0 0 -4" width="0.5" height="0.5" depth="0.5" color="#ff6b6b" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-box>
+  </a-scene>
+  <h1>İlkim, Doğum Günün Kutlu Olsun! 🎉</h1>
+  <p id="message">İlkim, galaksideki en havalı yıldız sensin! ✨ Az tanışsak bile, senin ışığın bu sayfayı yaratmama ilham verdi. Bugün sadece senin günün, keyfini çıkar!</p>
+  <button onclick="showSurprise()">Galaktik Sürprizi Aç! 🚀</button>
+  <button onclick="document.querySelector('audio').play()" style="margin-top: 10px; background: #ffd700;">Müziği Çal 🎶</button>
+  <canvas id="confetti"></canvas>
 
+  <audio loop>
+    <source src="https://freesound.org/data/previews/171/171104_3109489-lq.mp3" type="audio/mp3">
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Konfeti efekti (kalp ve yıldız şekilleri eklendi)
+    function launchConfetti() {
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.5 },
+        colors: ['#ff00ff', '#ffd700', '#00ff88', '#ffffff'],
+        shapes: ['circle', 'heart', 'star'],
+        scalar: 1.5
+      });
+    }
+    setInterval(launchConfetti, 1000); // Her 1 saniyede konfeti
+    launchConfetti();
+
+    // Rastgele sürpriz mesajlar (daha havalı ve samimi)
+    const messages = [
+      "İlkim, seninle tanışmak galaksiye bedel! Bugün yıldızlar senin için parlıyor! 🌟",
+      "Bu doğum günü, senin gibi eşsiz birine yakışır! Nice galaktik yıllara, İlkim! 🚀",
+      "İlkim, senin enerjin evrendeki tüm yıldızları kıskandırır! Keyfini çıkar! ✨",
+      "Az tanışsak da, seninle geçirdiğim her an bir doğum günü hediyesi! 🎁",
+      "İlkim, bu yıl senin için epik bir macera olsun! Galaksinin en havalı yıldızı sensin! 😎"
+    ];
+    function showSurprise() {
+      const messageElement = document.getElementById('message');
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      messageElement.innerText = randomMessage;
+      launchConfetti(); // Butona basınca ekstra konfeti
+    }
+  </script>
+</body>
+</html>
