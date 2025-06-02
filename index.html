@@ -20,7 +20,7 @@
       overflow: hidden;
       position: relative;
     }
-    /* Yıldız parıltı efekti için arka plan */
+    /* Yıldız parıltı efekti (çok azaltıldı) */
     body::before {
       content: '';
       position: absolute;
@@ -28,45 +28,48 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 20px 20px;
-      animation: twinkle 5s infinite;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 50px 50px; /* Daha seyrek yıldızlar */
+      animation: twinkle 10s infinite; /* Daha yavaş animasyon */
+      opacity: 0.3; /* Daha az görünür */
     }
     @keyframes twinkle {
-      0% { opacity: 0.5; }
-      50% { opacity: 1; }
-      100% { opacity: 0.5; }
+      0% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+      100% { opacity: 0.3; }
     }
     h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff;
       animation: glow 2s ease-in-out infinite alternate;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     p#message {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       text-align: center;
-      max-width: 600px;
-      margin: 20px;
+      max-width: 90%;
+      margin: 15px;
       text-shadow: 0 0 10px #fff;
       animation: slideUp 2s ease-in-out;
     }
     button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
+      padding: 12px 25px;
+      font-size: 1.1rem;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(45deg, #ff00ff, #00ff88);
       border: none;
       color: white;
       border-radius: 25px;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
       box-shadow: 0 0 20px #ff00ff;
       animation: pulse 1.5s infinite;
+      margin: 5px;
     }
     button:hover {
       transform: scale(1.1);
       box-shadow: 0 0 30px #00ff88;
+      background: linear-gradient(45deg, #00ff88, #ff00ff); /* Renk geçişi tersine */
     }
     canvas {
       position: fixed;
@@ -76,9 +79,9 @@
     }
     a-scene {
       position: absolute;
-      top: 10%;
+      top: 5%;
       width: 100%;
-      height: 200px;
+      height: 180px;
     }
     @keyframes glow {
       0% { text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff; }
@@ -98,24 +101,33 @@
       100% { opacity: 1; transform: translateY(0); }
     }
     @media (max-width: 600px) {
-      h1 { font-size: 2.5rem; }
-      p#message { font-size: 1.2rem; }
-      button { font-size: 1rem; padding: 10px 20px; }
-      a-scene { height: 150px; }
+      h1 { font-size: 2rem; }
+      p#message { font-size: 1rem; }
+      button { font-size: 0.9rem; padding: 8px 15px; }
+      a-scene { height: 120px; top: 2%; }
+      a-scene a-text { scale: 1.5 1.5 1.5; } /* 3D yazı boyutu mobilde küçültüldü */
+      a-scene a-sphere, a-scene a-box, a-scene a-cone { scale: 0.7 0.7 0.7; } /* 3D objeler küçültüldü */
+    }
+    @media (max-width: 400px) {
+      h1 { font-size: 1.8rem; }
+      p#message { font-size: 0.9rem; }
+      button { font-size: 0.8rem; padding: 6px 12px; }
+      a-scene { height: 100px; }
     }
   </style>
 </head>
 <body>
   <a-scene embedded>
-    <a-text value="İLKİM" color="#ff00ff" position="0 1 -5" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"></a-text>
+    <a-text value="İLKİM" color="#ff00ff" position="0 1 -5" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" animation__glow="property: material.opacity; from: 1; to: 0.5; loop: true; dur: 2000; easing: easeInOutSine"></a-text>
     <a-sphere position="-1.5 0.5 -4" radius="0.3" color="#ffd700" animation="property: position; to: -1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
     <a-sphere position="1.5 0.5 -4" radius="0.3" color="#00ff88" animation="property: position; to: 1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
     <a-box position="0 0 -4" width="0.5" height="0.5" depth="0.5" color="#ff6b6b" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-box>
+    <a-cone position="0 -0.5 -4" radius-bottom="0.4" radius-top="0" height="0.5" color="#ffb6c1" animation="property: position; to: 0 -0.3 -4; loop: true; dur: 3000; easing: easeInOutQuad"></a-cone>
   </a-scene>
   <h1>İlkim, Doğum Günün Kutlu Olsun! 🎉</h1>
   <p id="message">İlkim, galaksideki en havalı yıldız sensin! ✨ Az tanışsak bile, senin ışığın bu sayfayı yaratmama ilham verdi. Bugün sadece senin günün, keyfini çıkar!</p>
   <button onclick="showSurprise()">Galaktik Sürprizi Aç! 🚀</button>
-  <button onclick="document.querySelector('audio').play()" style="margin-top: 10px; background: #ffd700;">Müziği Çal 🎶</button>
+  <button onclick="document.querySelector('audio').play()" style="background: #ffd700;">Müziği Çal 🎶</button>
   <canvas id="confetti"></canvas>
 
   <audio loop>
@@ -124,21 +136,21 @@
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Konfeti efekti (kalp ve yıldız şekilleri eklendi)
+    // Konfeti efekti (mobilde performans için optimize edildi)
     function launchConfetti() {
       confetti({
-        particleCount: 200,
-        spread: 100,
+        particleCount: 150, // Mobilde daha az parçacık
+        spread: 80,
         origin: { y: 0.5 },
         colors: ['#ff00ff', '#ffd700', '#00ff88', '#ffffff'],
         shapes: ['circle', 'heart', 'star'],
-        scalar: 1.5
+        scalar: 1.2
       });
     }
-    setInterval(launchConfetti, 1000); // Her 1 saniyede konfeti
+    setInterval(launchConfetti, 1500); // Her 1.5 saniyede konfeti (daha seyrek)
     launchConfetti();
 
-    // Rastgele sürpriz mesajlar (daha havalı ve samimi)
+    // Rastgele sürpriz mesajlar
     const messages = [
       "İlkim, seninle tanışmak galaksiye bedel! Bugün yıldızlar senin için parlıyor! 🌟",
       "Bu doğum günü, senin gibi eşsiz birine yakışır! Nice galaktik yıllara, İlkim! 🚀",
@@ -150,7 +162,7 @@
       const messageElement = document.getElementById('message');
       const randomMessage = messages[Math.floor(Math.random() * messages.length)];
       messageElement.innerText = randomMessage;
-      launchConfetti(); // Butona basınca ekstra konfeti
+      launchConfetti();
     }
   </script>
 </body>
