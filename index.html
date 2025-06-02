@@ -20,7 +20,7 @@
       overflow: hidden;
       position: relative;
     }
-    /* Yıldız parıltı efekti (çok azaltıldı) */
+    /* Yıldız parıltı efekti (önceki optimize hali) */
     body::before {
       content: '';
       position: absolute;
@@ -29,9 +29,9 @@
       width: 100%;
       height: 100%;
       background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 50px 50px; /* Daha seyrek yıldızlar */
-      animation: twinkle 10s infinite; /* Daha yavaş animasyon */
-      opacity: 0.3; /* Daha az görünür */
+      background-size: 50px 50px;
+      animation: twinkle 10s infinite;
+      opacity: 0.3;
     }
     @keyframes twinkle {
       0% { opacity: 0.3; }
@@ -69,7 +69,7 @@
     button:hover {
       transform: scale(1.1);
       box-shadow: 0 0 30px #00ff88;
-      background: linear-gradient(45deg, #00ff88, #ff00ff); /* Renk geçişi tersine */
+      background: linear-gradient(45deg, #00ff88, #ff00ff);
     }
     canvas {
       position: fixed;
@@ -105,8 +105,8 @@
       p#message { font-size: 1rem; }
       button { font-size: 0.9rem; padding: 8px 15px; }
       a-scene { height: 120px; top: 2%; }
-      a-scene a-text { scale: 1.5 1.5 1.5; } /* 3D yazı boyutu mobilde küçültüldü */
-      a-scene a-sphere, a-scene a-box, a-scene a-cone { scale: 0.7 0.7 0.7; } /* 3D objeler küçültüldü */
+      a-scene a-text { scale: 1.5 1.5 1.5; }
+      a-scene a-sphere, a-scene a-box, a-scene a-cone { scale: 0.7 0.7 0.7; }
     }
     @media (max-width: 400px) {
       h1 { font-size: 1.8rem; }
@@ -118,7 +118,7 @@
 </head>
 <body>
   <a-scene embedded>
-    <a-text value="İLKİM" color="#ff00ff" position="0 1 -5" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" animation__glow="property: material.opacity; from: 1; to: 0.5; loop: true; dur: 2000; easing: easeInOutSine"></a-text>
+    <a-text value="İLKİM" color="#ff00ff" position="0 1 -6" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" animation__glow="property: material.opacity; from: 1; to: 0.5; loop: true; dur: 2000; easing: easeInOutSine"></a-text>
     <a-sphere position="-1.5 0.5 -4" radius="0.3" color="#ffd700" animation="property: position; to: -1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
     <a-sphere position="1.5 0.5 -4" radius="0.3" color="#00ff88" animation="property: position; to: 1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
     <a-box position="0 0 -4" width="0.5" height="0.5" depth="0.5" color="#ff6b6b" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-box>
@@ -136,10 +136,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Konfeti efekti (mobilde performans için optimize edildi)
+    // Konfeti efekti
     function launchConfetti() {
       confetti({
-        particleCount: 150, // Mobilde daha az parçacık
+        particleCount: 150,
         spread: 80,
         origin: { y: 0.5 },
         colors: ['#ff00ff', '#ffd700', '#00ff88', '#ffffff'],
@@ -147,7 +147,7 @@
         scalar: 1.2
       });
     }
-    setInterval(launchConfetti, 1500); // Her 1.5 saniyede konfeti (daha seyrek)
+    setInterval(launchConfetti, 1500);
     launchConfetti();
 
     // Rastgele sürpriz mesajlar
