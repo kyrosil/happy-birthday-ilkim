@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>İlkim'in Galaktik Doğum Günü Partisi 🌟</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -20,7 +19,6 @@
       overflow: hidden;
       position: relative;
     }
-    /* Yıldız parıltı efekti (önceki optimize hali) */
     body::before {
       content: '';
       position: absolute;
@@ -28,27 +26,46 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: twinkle 10s infinite;
-      opacity: 0.3;
+      background: radial-gradient(circle, rgba(255, 107, 107, 0.2) 10%, rgba(138, 43, 226, 0.3) 30%, transparent 70%);
+      animation: nebulaGlow 8s infinite ease-in-out;
+      opacity: 0.6;
     }
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      50% { opacity: 0.5; }
-      100% { opacity: 0.3; }
+    @keyframes nebulaGlow {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 0.6; }
+    }
+    #name-animation {
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ff88;
+      position: absolute;
+      top: 5%;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .letter {
+      opacity: 0;
+      animation: fadeInLetter 0.5s forwards;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    @keyframes fadeInLetter {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff;
-      animation: glow 2s ease-in-out infinite alternate;
-      margin-bottom: 15px;
+      margin: 10px 0;
     }
     p#message {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       text-align: center;
       max-width: 90%;
-      margin: 15px;
+      margin: 10px 0;
       text-shadow: 0 0 10px #fff;
       animation: slideUp 2s ease-in-out;
     }
@@ -63,7 +80,6 @@
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
       box-shadow: 0 0 20px #ff00ff;
-      animation: pulse 1.5s infinite;
       margin: 5px;
     }
     button:hover {
@@ -77,92 +93,255 @@
       left: 0;
       z-index: -1;
     }
-    a-scene {
+    #cake-container {
+      position: relative;
+      width: 200px;
+      height: 150px;
+      margin: 20px 0;
+    }
+    #cake {
+      width: 200px;
+      height: 100px;
+      background: #ffb6c1;
+      border-radius: 10px 10px 0 0;
       position: absolute;
-      top: 5%;
+      bottom: 0;
+      box-shadow: 0 0 20px #ffb6c1;
+    }
+    #cake::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
       width: 100%;
-      height: 180px;
+      height: 20px;
+      background: #ff6b6b;
+      border-radius: 10px 10px 0 0;
     }
-    @keyframes glow {
-      0% { text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff; }
-      100% { text-shadow: 0 0 30px #fff, 0 0 60px #00ff88; }
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 40px;
+      background: #ffd700;
+      top: -40px;
+      border-radius: 2px;
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 20px #ff00ff; }
-      50% { box-shadow: 0 0 40px #00ff88; }
-      100% { box-shadow: 0 0 20px #ff00ff; }
+    .candle::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 10px;
+      background: #ff4500;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: flicker 0.5s infinite alternate;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
+    #candle1 { left: 40px; }
+    #candle2 { left: 90px; }
+    #candle3 { left: 140px; }
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); }
+      100% { transform: translateX(-50%) scale(1.2); }
+    }
+    #wish-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    #wish-content {
+      background: #1e1e2f;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 30px #ff00ff;
+      max-width: 90%;
+    }
+    #wish-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    #wish-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    #wish-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      animation: fly 2s forwards;
+    }
+    @keyframes fly {
+      0% { transform: translate(0, 0); opacity: 1; }
+      100% { transform: translate(100px, -100px); opacity: 0; }
     }
     @keyframes slideUp {
       0% { opacity: 0; transform: translateY(50px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8rem;
+      color: #fff;
+      text-shadow: 0 0 5px #ff00ff;
+    }
     @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
+      #name-animation { font-size: 2rem; top: 3%; }
+      h1 { font-size: 1.8rem; }
       p#message { font-size: 1rem; }
       button { font-size: 0.9rem; padding: 8px 15px; }
-      a-scene { height: 120px; top: 2%; }
-      a-scene a-text { scale: 1.5 1.5 1.5; }
-      a-scene a-sphere, a-scene a-box, a-scene a-cone { scale: 0.7 0.7 0.7; }
+      #cake-container { width: 150px; height: 120px; }
+      #cake { width: 150px; height: 80px; }
+      #cake::before { top: -15px; height: 15px; }
+      .candle { height: 30px; top: -30px; }
+      .candle::before { top: -8px; height: 8px; }
+      #wish-content h2 { font-size: 1.2rem; }
+      #wish-input { font-size: 0.9rem; }
+      #footer { font-size: 0.7rem; }
     }
     @media (max-width: 400px) {
-      h1 { font-size: 1.8rem; }
+      #name-animation { font-size: 1.8rem; top: 2%; }
+      h1 { font-size: 1.5rem; }
       p#message { font-size: 0.9rem; }
       button { font-size: 0.8rem; padding: 6px 12px; }
-      a-scene { height: 100px; }
+      #cake-container { width: 120px; height: 100px; }
+      #cake { width: 120px; height: 60px; }
+      #footer { font-size: 0.6rem; }
     }
   </style>
 </head>
 <body>
-  <a-scene embedded>
-    <a-text value="İLKİM" color="#ff00ff" position="0 1 -6" scale="2.5 2.5 2.5" align="center" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" animation__glow="property: material.opacity; from: 1; to: 0.5; loop: true; dur: 2000; easing: easeInOutSine"></a-text>
-    <a-sphere position="-1.5 0.5 -4" radius="0.3" color="#ffd700" animation="property: position; to: -1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
-    <a-sphere position="1.5 0.5 -4" radius="0.3" color="#00ff88" animation="property: position; to: 1.5 1.5 -4; loop: true; dur: 2000; easing: easeInOutQuad"></a-sphere>
-    <a-box position="0 0 -4" width="0.5" height="0.5" depth="0.5" color="#ff6b6b" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-box>
-    <a-cone position="0 -0.5 -4" radius-bottom="0.4" radius-top="0" height="0.5" color="#ffb6c1" animation="property: position; to: 0 -0.3 -4; loop: true; dur: 3000; easing: easeInOutQuad"></a-cone>
-  </a-scene>
+  <div id="name-animation"></div>
   <h1>İlkim, Doğum Günün Kutlu Olsun! 🎉</h1>
   <p id="message">İlkim, galaksideki en havalı yıldız sensin! ✨ Az tanışsak bile, senin ışığın bu sayfayı yaratmama ilham verdi. Bugün sadece senin günün, keyfini çıkar!</p>
-  <button onclick="showSurprise()">Galaktik Sürprizi Aç! 🚀</button>
+  <div id="cake-container">
+    <div id="cake"></div>
+    <div class="candle" id="candle1"></div>
+    <div class="candle" id="candle2"></div>
+    <div class="candle" id="candle3"></div>
+  </div>
+  <button onclick="blowCandles()">Mumları Üfle! 🕯️</button>
+  <button onclick="showSurprise()">Evrenin En Büyük Sürprizini Keşfet! 🌌</button>
   <button onclick="document.querySelector('audio').play()" style="background: #ffd700;">Müziği Çal 🎶</button>
   <canvas id="confetti"></canvas>
 
-  <audio loop>
-    <source src="https://freesound.org/data/previews/171/171104_3109489-lq.mp3" type="audio/mp3">
+  <div id="wish-modal">
+    <div id="wish-content">
+      <h2>İlkim, Şimdi Dileğini Tut! 🌠</h2>
+      <input type="text" id="wish-input" placeholder="Dileğini yaz...">
+      <button onclick="makeWish()">Dileğini Tut!</button>
+      <div id="wish-stars"></div>
+    </div>
+  </div>
+
+  <div id="footer">Kyros tarafından sevgiyle hazırlandı ❤️</div>
+
+  <audio autoplay loop>
+    <source src="https://github.com/kyrosil/happy-birthday-ilkim/blob/main/İyi ki doğdun İLKİM - İsme Özel Doğum Günü Şarkısı.mp3?raw=true" type="audio/mp3">
   </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    // İlkim'in adını animasyonla yazma
+    const name = "İLKİM";
+    const nameContainer = document.getElementById('name-animation');
+    name.split('').forEach((letter, index) => {
+      const span = document.createElement('span');
+      span.className = 'letter';
+      span.innerText = letter;
+      span.style.animationDelay = `${index * 0.3}s`;
+      nameContainer.appendChild(span);
+    });
+
     // Konfeti efekti
     function launchConfetti() {
       confetti({
-        particleCount: 150,
-        spread: 80,
+        particleCount: 50,
+        spread: 60,
         origin: { y: 0.5 },
         colors: ['#ff00ff', '#ffd700', '#00ff88', '#ffffff'],
-        shapes: ['circle', 'heart', 'star'],
-        scalar: 1.2
+        shapes: ['circle'],
+        scalar: 1
       });
     }
-    setInterval(launchConfetti, 1500);
+    setInterval(launchConfetti, 3000);
     launchConfetti();
 
     // Rastgele sürpriz mesajlar
     const messages = [
-      "İlkim, seninle tanışmak galaksiye bedel! Bugün yıldızlar senin için parlıyor! 🌟",
-      "Bu doğum günü, senin gibi eşsiz birine yakışır! Nice galaktik yıllara, İlkim! 🚀",
-      "İlkim, senin enerjin evrendeki tüm yıldızları kıskandırır! Keyfini çıkar! ✨",
-      "Az tanışsak da, seninle geçirdiğim her an bir doğum günü hediyesi! 🎁",
-      "İlkim, bu yıl senin için epik bir macera olsun! Galaksinin en havalı yıldızı sensin! 😎"
+      "İlkim, seninle tanışmak galaksiye bedel! Bu yıldızlar senin için parlıyor! 🌟",
+      "İlkim, bu doğum günü senin için evrenin en büyük hediyesi! Nice yıllara! 🚀",
+      "İlkim, senin enerjinle galaksi bile dans ediyor! Keyfini çıkar! ✨",
+      "Az tanışsak da, İlkim, seninle her an bir yıldız kayması gibi! 🎁",
+      "İlkim, bu yıl senin için destansı bir macera başlasın! En havalı yıldız sensin! 😎"
     ];
     function showSurprise() {
+      console.log("showSurprise fonksiyonu çağrıldı!");
       const messageElement = document.getElementById('message');
-      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      messageElement.innerText = randomMessage;
-      launchConfetti();
+      if (messageElement) {
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        messageElement.innerText = randomMessage;
+        launchConfetti();
+      } else {
+        console.error("message elementi bulunamadı!");
+      }
+    }
+
+    // Mumları üfleme
+    let candlesBlown = false;
+    function blowCandles() {
+      if (!candlesBlown) {
+        document.querySelectorAll('.candle').forEach(candle => {
+          candle.style.display = 'none';
+        });
+        document.getElementById('wish-modal').style.display = 'flex';
+        candlesBlown = true;
+      }
+    }
+
+    // Dilek tutma
+    function makeWish() {
+      const wishInput = document.getElementById('wish-input').value;
+      if (wishInput) {
+        const starsContainer = document.getElementById('wish-stars');
+        for (let i = 0; i < 10; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+          starsContainer.appendChild(star);
+        }
+        setTimeout(() => {
+          document.getElementById('wish-modal').style.display = 'none';
+          document.getElementById('wish-input').value = '';
+          launchConfetti();
+        }, 2000);
+      }
     }
   </script>
 </body>
