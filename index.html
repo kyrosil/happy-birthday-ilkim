@@ -46,7 +46,7 @@
     }
     .letter {
       opacity: 0;
-      animation: fadeInLetter 0.5s forwards;
+      animation: fadeInLetter 1s forwards;
       color: #ff00ff;
       text-shadow: 0 0 10px #ff00ff;
       display: inline-block;
@@ -123,30 +123,31 @@
     }
     .candle {
       position: absolute;
-      width: 10px;
+      width: 12px;
       height: 40px;
       background: #ffd700;
       top: -40px;
-      border-radius: 2px;
+      border-radius: 3px;
+      box-shadow: 0 0 10px #ffd700;
     }
     .candle::before {
       content: '';
       position: absolute;
-      top: -10px;
+      top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 6px;
-      height: 10px;
+      width: 8px;
+      height: 12px;
       background: #ff4500;
       clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      animation: flicker 0.5s infinite alternate;
+      animation: flicker 0.7s infinite alternate;
     }
-    #candle1 { left: 40px; }
-    #candle2 { left: 90px; }
-    #candle3 { left: 140px; }
+    #candle1 { left: 20%; }
+    #candle2 { left: 50%; transform: translateX(-50%); }
+    #candle3 { left: 80%; }
     @keyframes flicker {
       0% { transform: translateX(-50%) scale(1); }
-      100% { transform: translateX(-50%) scale(1.2); }
+      100% { transform: translateX(-50%) scale(1.15); }
     }
     #wish-modal {
       display: none;
@@ -226,8 +227,8 @@
       #cake-container { width: 150px; height: 120px; }
       #cake { width: 150px; height: 80px; }
       #cake::before { top: -15px; height: 15px; }
-      .candle { height: 30px; top: -30px; }
-      .candle::before { top: -8px; height: 8px; }
+      .candle { height: 30px; top: -30px; width: 10px; }
+      .candle::before { top: -8px; height: 8px; width: 6px; }
       #wish-content h2 { font-size: 1.2rem; }
       #wish-input { font-size: 0.9rem; }
       #footer { font-size: 0.7rem; }
@@ -282,7 +283,7 @@
       const span = document.createElement('span');
       span.className = 'letter';
       span.innerText = letter;
-      span.style.animationDelay = `${index * 0.3}s`;
+      span.style.animationDelay = `${index * 0.5}s`;
       nameContainer.appendChild(span);
     });
 
@@ -297,9 +298,7 @@
         scalar: 1
       });
     }
-    // İlk yüklemede bir kez konfeti
     launchConfetti();
-    // 5 saniyede bir konfeti (performans için aralığı artırdım)
     setInterval(launchConfetti, 5000);
 
     // Rastgele sürpriz mesajlar
@@ -345,7 +344,9 @@
         setTimeout(() => {
           document.getElementById('wish-modal').style.display = 'none';
           document.getElementById('wish-input').value = '';
-          starsContainer.innerHTML = ''; // Yıldızları temizle
+          starsContainer.innerHTML = '';
+          const messageElement = document.getElementById('message');
+          messageElement.innerText = "İlkim, dileğin evrene ulaştı! 🌌 Nice mutlu yıllara!";
           launchConfetti();
         }, 2000);
       } else {
