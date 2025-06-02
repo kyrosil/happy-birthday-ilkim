@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>İlkim'in Galaktik Doğum Günü Partisi 🌟</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -41,7 +41,7 @@
       font-weight: 700;
       text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ff88;
       position: relative;
-      margin: 3px 0;
+      margin: 5px 0;
       z-index: 1;
     }
     .letter {
@@ -58,14 +58,14 @@
     h1 {
       font-size: 1.8rem;
       text-shadow: 0 0 20px #fff, 0 0 40px #ff00ff;
-      margin: 2px 0;
+      margin: 3px 0;
       z-index: 1;
     }
     p#message {
       font-size: 0.9rem;
       text-align: center;
       max-width: 90%;
-      margin: 2px 0;
+      margin: 3px 0;
       text-shadow: 0 0 10px #fff;
       animation: slideUp 2s ease-in-out;
       z-index: 1;
@@ -81,7 +81,7 @@
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
       box-shadow: 0 0 20px #ff00ff;
-      margin: 1px 0;
+      margin: 2px;
       z-index: 1;
     }
     button:hover {
@@ -99,7 +99,7 @@
       position: relative;
       width: 160px;
       height: 110px;
-      margin: 3px 0;
+      margin: 5px 0;
       z-index: 1;
     }
     #cake {
@@ -170,7 +170,6 @@
       text-align: center;
       box-shadow: 0 0 30px #ff00ff;
       max-width: 90%;
-      position: relative;
       z-index: 101;
     }
     #wish-content h2 {
@@ -218,45 +217,19 @@
       color: #fff;
       text-shadow: 0 0 5px #ff00ff;
       z-index: 1;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
+
+    /* 🌟 Mobilde tek ekrana sığdırma */
     @media (max-width: 600px) {
-      #name-animation { font-size: 1.5rem; margin: 2px 0; }
-      h1 { font-size: 1.2rem; margin: 1px 0; }
-      p#message { font-size: 0.7rem; margin: 1px 0; }
-      button { 
-        font-size: 0.65rem; 
-        padding: 5px 8px; 
-        margin: 0; 
-        line-height: 1.2; 
+      html, body {
+        height: 100vh;
+        overflow: hidden;
       }
-      #cake-container { width: 100px; height: 80px; margin: 2px 0; }
-      #cake { width: 100px; height: 50px; }
-      #cake::before { top: -8px; height: 8px; }
-      .candle { height: 20px; top: -20px; width: 7px; }
-      .candle::before { top: -6px; height: 6px; width: 5px; }
-      #wish-content h2 { font-size: 0.9rem; margin-bottom: 5px; }
-      #wish-input { font-size: 0.65rem; padding: 4px; }
-      #footer { font-size: 0.55rem; margin-bottom: 2px; }
-    }
-    @media (max-width: 400px) {
-      #name-animation { font-size: 1.3rem; margin: 1px 0; }
-      h1 { font-size: 1rem; margin: 1px 0; }
-      p#message { font-size: 0.65rem; margin: 1px 0; }
-      button { 
-        font-size: 0.6rem; 
-        padding: 4px 6px; 
-        margin: 0; 
-        line-height: 1.1; 
+      body {
+        transform: scale(0.85);
+        transform-origin: top center;
       }
-      #cake-container { width: 90px; height: 70px; margin: 1px 0; }
-      #cake { width: 90px; height: 45px; }
-      #cake::before { top: -7px; height: 7px; }
-      .candle { height: 18px; top: -18px; width: 6px; }
-      .candle::before { top: -5px; height: 5px; width: 4px; }
-      #wish-content h2 { font-size: 0.8rem; margin-bottom: 4px; }
-      #wish-input { font-size: 0.6rem; padding: 3px; }
-      #footer { font-size: 0.5rem; margin-bottom: 1px; }
     }
   </style>
 </head>
@@ -278,7 +251,7 @@
   <div id="wish-modal">
     <div id="wish-content">
       <h2>İlkim, Şimdi Dileğini Tut! 🌠</h2>
-      <input type="text" id="wish-input" placeholder="Dileğini yaz...">
+      <input type="text" id="wish-input" placeholder="Dileğini yaz..." />
       <button id="make-wish-btn">Dileğini Tut!</button>
       <div id="wish-stars"></div>
     </div>
@@ -287,12 +260,11 @@
   <div id="footer">Kyros tarafından sevgiyle hazırlandı ❤️</div>
 
   <audio id="birthday-audio">
-    <source src="https://github.com/kyrosil/happy-birthday-ilkim/raw/main/İyi%20ki%20doğdun%20İLKİM%20-%20İsme%20Özel%20Doğum%20Günü%20Şarkısı.mp3" type="audio/mp3">
+    <source src="https://github.com/kyrosil/happy-birthday-ilkim/raw/main/İyi%20ki%20doğdun%20İLKİM%20-%20İsme%20Özel%20Doğum%20Günü%20Şarkısı.mp3" type="audio/mp3" />
   </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // İlkim'in adını animasyonla yazma
     const name = "İLKİM";
     const nameContainer = document.getElementById('name-animation');
     name.split('').forEach((letter, index) => {
@@ -303,7 +275,6 @@
       nameContainer.appendChild(span);
     });
 
-    // Konfeti efekti
     function launchConfetti() {
       confetti({
         particleCount: 50,
@@ -317,7 +288,6 @@
     launchConfetti();
     setInterval(launchConfetti, 5000);
 
-    // Rastgele sürpriz mesajlar
     const messages = [
       "İlkim, seninle tanışmak galaksiye bedel! Bu yıldızlar senin için parlıyor! 🌟",
       "İlkim, bu doğum günü senin için evrenin en büyük hediyesi! Nice yıllara! 🚀",
@@ -332,24 +302,20 @@
       launchConfetti();
     }
 
-    // Mumları üfleme
     let candlesBlown = false;
     function blowCandles() {
       if (!candlesBlown) {
-        document.querySelectorAll('.candle').forEach(candle => {
-          candle.style.display = 'none';
-        });
+        document.querySelectorAll('.candle').forEach(c => c.style.display = 'none');
         document.getElementById('wish-modal').style.display = 'flex';
         candlesBlown = true;
         launchConfetti();
       }
     }
 
-    // Dilek tutma
     function makeWish() {
       const wishInput = document.getElementById('wish-input').value;
+      const starsContainer = document.getElementById('wish-stars');
       if (wishInput) {
-        const starsContainer = document.getElementById('wish-stars');
         for (let i = 0; i < 10; i++) {
           const star = document.createElement('div');
           star.className = 'star';
@@ -361,8 +327,7 @@
           document.getElementById('wish-modal').style.display = 'none';
           document.getElementById('wish-input').value = '';
           starsContainer.innerHTML = '';
-          const messageElement = document.getElementById('message');
-          messageElement.innerText = "İlkim, dileğin evrene ulaştı! 🌌 Nice mutlu yıllara!";
+          document.getElementById('message').innerText = "İlkim, dileğin evrene ulaştı! 🌌 Nice mutlu yıllara!";
           launchConfetti();
         }, 2000);
       } else {
@@ -370,7 +335,6 @@
       }
     }
 
-    // Müzik kontrolü
     const audio = document.getElementById('birthday-audio');
     let isPlaying = false;
     function toggleMusic() {
@@ -378,16 +342,15 @@
         audio.pause();
         document.getElementById('play-music-btn').innerText = 'Müziği Çal 🎶';
       } else {
-        audio.play().catch(error => {
-          console.error('Müzik oynatma hatası:', error);
-          alert('Müzik oynatılamadı. Lütfen dosya yolunu kontrol edin veya tarayıcı izinlerini gözden geçirin.');
+        audio.play().catch(err => {
+          console.error('Müzik hatası:', err);
+          alert('Müzik oynatılamadı.');
         });
         document.getElementById('play-music-btn').innerText = 'Müziği Durdur ⏸️';
       }
       isPlaying = !isPlaying;
     }
 
-    // Buton olay dinleyicileri
     document.getElementById('blow-candles-btn').addEventListener('click', blowCandles);
     document.getElementById('surprise-btn').addEventListener('click', showSurprise);
     document.getElementById('play-music-btn').addEventListener('click', toggleMusic);
